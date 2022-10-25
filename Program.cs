@@ -1,4 +1,5 @@
-﻿namespace nb_jeu_de_math
+﻿using System;
+namespace nb_jeu_de_math
 {
     class MainClass
     {
