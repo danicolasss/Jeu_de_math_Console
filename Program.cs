@@ -1,38 +1,71 @@
-﻿
-using System;
-namespace nb_jeu_de_math
+﻿namespace nb_jeu_de_math
 {
     class MainClass
     {
+        static Random Random = new Random();
         const int min = 1;
         const int max = 9;
 
-        private static bool DemanderAddition()
+
+        private static int GetOperateur ()
+        {// + * - /
+            
+            int operateur = Random.Next(1,4);
+            return operateur;   
+
+        }
+
+
+        private static bool DemanderOperation()
         {
             int nombreUtilisateur = 0;
+            int operation = GetOperateur();
 
-            Random Random = new Random();
             int A = Random.Next(min, max);
             int B = Random.Next(min, max);
 
+            int resultatOperation = 0;
 
             while (true)
             {
-                Console.Write("Combien fait " + A + " + " + B + " : ");
+                switch (operation)
+                {
+                    case 1:
+                        Console.Write("Combien fait " + A + " + " + B + " : ");
+                        resultatOperation = A + B;
+                        break;
+                    case 2:
+                        Console.Write("Combien fait " + A + " - " + B + " : ");
+                        resultatOperation = A - B;
+                        break;
+                    case 3:
+                        Console.Write("Combien fait " + A + " * " + B + " : ");
+                        resultatOperation = A * B;
+                        break;
+                    case 4:
+                        Console.Write("Combien fait " + A + " / " + B + " : ");
+                        resultatOperation = A / B;
+                        break;
+
+                }
+
+
+
+                
                 string resultat = Console.ReadLine();
             
                 if (int.TryParse(resultat, out nombreUtilisateur))
                 // la conversion c'est bien passée
                 {
-                    int addition = A + B;
-                    if (nombreUtilisateur == addition)
+               
+                    if (nombreUtilisateur == resultatOperation)
                     {
                         Console.WriteLine("c'est exate");
                         return true;
                     }
                     else
                     {
-                        Console.WriteLine("Non c'était " + addition);
+                        Console.WriteLine("Non c'était " + resultatOperation);
                         return false;   
                     }
                 }
@@ -51,7 +84,7 @@ namespace nb_jeu_de_math
             for (int i = 0; i < Nb_question; i++)
             {
                 Console.WriteLine("Question n° "+(i+1)+"/" +Nb_question);
-                if (DemanderAddition())
+                if (DemanderOperation())
                 {
                     note++;
                 }
